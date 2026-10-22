@@ -24,11 +24,11 @@ namespace SchoolEventsMini.Data
 
                 entity.Property(e => e.Name)
                     .IsRequired()
-                    .HasMaxLength(200);
+                    .HasMaxLength(100);
 
                 entity.Property(e => e.Place)
                     .IsRequired()
-                    .HasMaxLength(200);
+                    .HasMaxLength(150);
 
                 entity.Property(e => e.Category)
                     .IsRequired()
