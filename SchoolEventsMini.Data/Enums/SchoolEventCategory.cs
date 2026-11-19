@@ -9,10 +9,11 @@ namespace SchoolEventsMini.Data.Enums
    
         public enum SchoolEventCategory
         {
-            Educational,
-            Cultural,
-            Sports,
-            Celebration
-        }
+        Holiday,
+        Sports,
+        Education,
+        Culture,
+        Other
+    }
     
 }
