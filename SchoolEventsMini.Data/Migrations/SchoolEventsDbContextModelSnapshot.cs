@@ -22,28 +22,83 @@ namespace SchoolEventsMini.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("SchoolEventsMini.Data.Entities.EventRegistration", b =>
+                {
+                    b.Property<Guid>("EventRegistrationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ParticipantId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("SchoolEventId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("EventRegistrationId");
+
+                    b.HasIndex("ParticipantId");
+
+                    b.HasIndex("SchoolEventId");
+
+                    b.ToTable("EventRegistrations");
+                });
+
+            modelBuilder.Entity("SchoolEventsMini.Data.Entities.Organizer", b =>
+                {
+                    b.Property<Guid>("OrganizerId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("OrganizerId");
+
+                    b.ToTable("Organizers");
+                });
+
+            modelBuilder.Entity("SchoolEventsMini.Data.Entities.Participant", b =>
+                {
+                    b.Property<Guid>("ParticipantId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("ParticipantId");
+
+                    b.ToTable("Participants");
+                });
+
             modelBuilder.Entity("SchoolEventsMini.Data.Entities.SchoolEvent", b =>
                 {
                     b.Property<Guid>("SchoolEventId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<int>("Category")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("Date")
+                    b.Property<DateTime?>("Date")
+                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<Guid>("OrganizerId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Place")
                         .IsRequired()
@@ -52,7 +107,54 @@ namespace SchoolEventsMini.Data.Migrations
 
                     b.HasKey("SchoolEventId");
 
+                    b.HasIndex("OrganizerId");
+
                     b.ToTable("SchoolEvents");
+                });
+
+            modelBuilder.Entity("SchoolEventsMini.Data.Entities.EventRegistration", b =>
+                {
+                    b.HasOne("SchoolEventsMini.Data.Entities.Participant", "Participant")
+                        .WithMany("Registrations")
+                        .HasForeignKey("ParticipantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SchoolEventsMini.Data.Entities.SchoolEvent", "SchoolEvent")
+                        .WithMany("Registrations")
+                        .HasForeignKey("SchoolEventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Participant");
+
+                    b.Navigation("SchoolEvent");
+                });
+
+            modelBuilder.Entity("SchoolEventsMini.Data.Entities.SchoolEvent", b =>
+                {
+                    b.HasOne("SchoolEventsMini.Data.Entities.Organizer", "Organizer")
+                        .WithMany("SchoolEvents")
+                        .HasForeignKey("OrganizerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Organizer");
+                });
+
+            modelBuilder.Entity("SchoolEventsMini.Data.Entities.Organizer", b =>
+                {
+                    b.Navigation("SchoolEvents");
+                });
+
+            modelBuilder.Entity("SchoolEventsMini.Data.Entities.Participant", b =>
+                {
+                    b.Navigation("Registrations");
+                });
+
+            modelBuilder.Entity("SchoolEventsMini.Data.Entities.SchoolEvent", b =>
+                {
+                    b.Navigation("Registrations");
                 });
 #pragma warning restore 612, 618
         }
