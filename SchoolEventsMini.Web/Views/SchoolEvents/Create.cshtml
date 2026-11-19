@@ -1,66 +1,42 @@
-﻿@{
-    ViewData["Title"] = "Създай събитие";
-}
+﻿@using SchoolEventsMini.Data.Enums
 
-<h2>Създай събитие</h2>
+<h1>Добави училищно събитие</h1>
 
-<form asp-controller="SchoolEvents" asp-action="Create" method="post">
-
-    <div class="form-group mb-3">
+<form method="post" action="create">
+    <div class="form-group">
         <label for="event_name">Име на събитието</label>
-        <input type="text"
-               class="form-control"
-               name="Name"
-               id="event_name"
-               placeholder="Въведи име на събитието"
-               required />
+        <input type="text" class="form-control" name="name" id="event_name" required>
     </div>
 
-    <div class="form-group mb-3">
+    <div class="form-group">
         <label for="event_date">Дата</label>
-        <input type="date"
-               class="form-control"
-               name="Date"
-               id="event_date"
-               required />
+        <input type="date" class="form-control" name="date" id="event_date" required>
     </div>
 
-    <div class="form-group mb-3">
+    <div class="form-group">
         <label for="event_place">Място</label>
-        <input type="text"
-               class="form-control"
-               name="Place"
-               id="event_place"
-               placeholder="Въведи място"
-               required />
+        <input type="text" class="form-control" name="place" id="event_place" required>
     </div>
 
-    <div class="form-group mb-3">
+    <div class="form-group">
         <label for="event_category">Категория</label>
-        <select class="form-control" name="Category" id="event_category">
-            <option value="Празник">Празник</option>
-            <option value="Спорт">Спорт</option>
-            <option value="Образование">Образование</option>
-            <option value="Култура">Култура</option>
-            <option value="Друго">Друго</option>
+        <select class="form-control" name="category" id="event_category">
+            @foreach (var category in Enum.GetValues<SchoolEventCategory>())
+            {
+                <option value="@category">@category</option>
+            }
         </select>
     </div>
 
-    <div class="form-group mb-3">
+    <div class="form-group">
         <label for="event_description">Описание</label>
-        <textarea class="form-control"
-                  name="Description"
-                  id="event_description"
-                  rows="4"
-                  placeholder="Въведи описание на събитието"></textarea>
+        <textarea class="form-control" name="description" id="event_description"></textarea>
     </div>
 
-    <button type="submit" class="btn btn-primary">Запази</button>
+    <div class="form-group">
+        <label for="organizer_id">ID на организатора</label>
+        <input type="text" class="form-control" name="organizerId" id="organizer_id" required>
+    </div>
 
-    <a asp-controller="SchoolEvents"
-       asp-action="Index"
-       class="btn btn-secondary">
-        Назад
-    </a>
-
+    <button type="submit" class="btn btn-primary my-3">Запази</button>
 </form>

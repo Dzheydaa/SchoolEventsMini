@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using SchoolEventsMini.Data;
-using Microsoft.EntityFrameworkCore.SqlServer;
+using SchoolEventsMini.Services;
+using SchoolEventsMini.Services.Contacts;
 
 namespace SchoolEventsMini.Web
 {
@@ -14,6 +15,7 @@ namespace SchoolEventsMini.Web
                 options.UseSqlServer(
                     builder.Configuration.GetConnectionString("DefaultConnection")));
 
+            builder.Services.AddScoped<ISchoolEventService, SchoolEventService>();
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 

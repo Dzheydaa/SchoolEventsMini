@@ -1,11 +1,44 @@
-﻿@{
-    ViewData["Title"] = "School Events";
+﻿@model IEnumerable<SchoolEventsMini.Data.Entities.SchoolEvent>
+
+@{
+    ViewData["Title"] = "Училищни събития";
 }
 
-<h1>School Events controller test</h1>
+<h1>Училищни събития</h1>
 
 <a asp-controller="SchoolEvents"
    asp-action="Create"
    class="btn btn-primary">
-    Добави ново събитие
+    Добави събитие
 </a>
+
+@if (!Model.Any())
+{
+    <p>Все още няма добавени събития.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Име</th>
+                <th>Дата</th>
+                <th>Място</th>
+                <th>Категория</th>
+                <th>Описание</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var schoolEvent in Model)
+            {
+                <tr>
+                    <td>@schoolEvent.Name</td>
+                    <td>@schoolEvent.Date?.ToString("dd.MM.yyyy")</td>
+                    <td>@schoolEvent.Place</td>
+                    <td>@schoolEvent.Category</td>
+                    <td>@schoolEvent.Description</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
