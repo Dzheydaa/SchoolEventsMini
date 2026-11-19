@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolEventsMini.Web", "Sch
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolEventsMini.Data", "SchoolEventsMini.Data\SchoolEventsMini.Data.csproj", "{8F7CBC19-8F34-4CE5-B226-29E435F1A8B7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolEventsMini.Services", "SchoolEventsMini.Services\SchoolEventsMini.Services.csproj", "{50BC9FAF-9A55-4DA1-A7F0-354B3315C870}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{8F7CBC19-8F34-4CE5-B226-29E435F1A8B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F7CBC19-8F34-4CE5-B226-29E435F1A8B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F7CBC19-8F34-4CE5-B226-29E435F1A8B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50BC9FAF-9A55-4DA1-A7F0-354B3315C870}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50BC9FAF-9A55-4DA1-A7F0-354B3315C870}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50BC9FAF-9A55-4DA1-A7F0-354B3315C870}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50BC9FAF-9A55-4DA1-A7F0-354B3315C870}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
